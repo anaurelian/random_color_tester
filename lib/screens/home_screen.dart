@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_randomcolor/flutter_randomcolor.dart';
 import 'package:random_color_tester/common/ui_strings.dart';
+import 'package:random_color_tester/screens/colors_screen.dart';
 import 'package:random_color_tester/widgets/custom_chips.dart';
 import 'package:random_color_tester/widgets/options_container.dart';
 
@@ -15,9 +16,22 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   double _colorCount = 100.0;
 
-  final Set<ColorType> _colorTypes = {ColorType.random};
+  final Set<ColorType> _colorTypeSet = {ColorType.random};
 
   Luminosity _luminosity = Luminosity.random;
+
+  void _generatePressed() {
+    Options options = Options(
+      count: _colorCount.toInt(),
+      format: Format.rgbArray,
+      colorType: _colorTypeSet.toList(),
+      luminosity: _luminosity,
+    );
+    final List rgbColors = RandomColor.getColor(options);
+    List<Color> colors = rgbColors.map((rgb) => Color.fromRGBO(rgb[0], rgb[1], rgb[2], 1.0)).toList();
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ColorsScreen(colors: colors)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.build),
         label: const Text(UIStrings.generateButton),
-        onPressed: () {},
+        onPressed: _generatePressed,
       ),
     );
   }
@@ -93,13 +107,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return ColorFilterChip(
       color: _colorTypeColors[colorType]!,
       label: describeEnum(colorType),
-      selected: _colorTypes.contains(colorType),
+      selected: _colorTypeSet.contains(colorType),
       onSelected: (bool value) {
         setState(() {
           if (value) {
-            _colorTypes.add(colorType);
+            _colorTypeSet.add(colorType);
           } else {
-            _colorTypes.remove(colorType);
+            _colorTypeSet.remove(colorType);
           }
         });
       },

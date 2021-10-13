@@ -15,7 +15,10 @@ class OptionsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
-      color: Colors.black12,
+      decoration: const BoxDecoration(
+        color: Colors.black12,
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
