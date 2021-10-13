@@ -1,16 +1,7 @@
 # random_color_tester
 
-A new Flutter project.
+A basic Flutter project that tests the [flutter_randomcolor](https://pub.dev/packages/flutter_randomcolor) Flutter Package.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| Home         | Color List     | Color Preview |
+|--------------|-----------|------------|
+| ![random_color_tester-1](https://user-images.githubusercontent.com/24680762/137169423-7716212b-06b5-4b93-bf5c-2624958079bb.png) | ![random_color_tester-2](https://user-images.githubusercontent.com/24680762/137169426-9965747e-3224-4a3a-b51c-873e8dae0746.png) | ![random_color_tester-3](https://user-images.githubusercontent.com/24680762/137169430-a6ddd425-4f88-4751-94a0-f03ded00c586.png) |
