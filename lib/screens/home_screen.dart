@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_randomcolor/flutter_randomcolor.dart';
 import 'package:random_color_tester/common/ui_strings.dart';
-import 'package:random_color_tester/utils/color_utils.dart';
+import 'package:random_color_tester/widgets/custom_chips.dart';
+import 'package:random_color_tester/widgets/options_container.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -30,85 +31,93 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView(
       padding: const EdgeInsets.all(16.0),
       children: [
-        Text(UIStrings.colorTypeSubtitle, style: Theme.of(context).textTheme.headline6),
-        const SizedBox(height: 8.0),
-        Wrap(
-          // spacing: 8.0,
-          alignment: WrapAlignment.spaceBetween,
-          children: [
-            _buildColorTypeChip(ColorType.random),
-            _buildColorTypeChip(ColorType.red),
-            _buildColorTypeChip(ColorType.orange),
-            _buildColorTypeChip(ColorType.yellow),
-            _buildColorTypeChip(ColorType.green),
-            _buildColorTypeChip(ColorType.blue),
-            _buildColorTypeChip(ColorType.purple),
-            _buildColorTypeChip(ColorType.pink),
-            _buildColorTypeChip(ColorType.monochrome),
-          ],
+        Container(
+          color: Colors.black12,
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Text(UIStrings.colorTypeSubtitle, style: Theme.of(context).textTheme.headline6),
+              const SizedBox(height: 16.0),
+              Wrap(
+                spacing: 8.0,
+                alignment: WrapAlignment.spaceBetween,
+                children: [
+                  _buildColorTypeChip(ColorType.random),
+                  _buildColorTypeChip(ColorType.red),
+                  _buildColorTypeChip(ColorType.orange),
+                  _buildColorTypeChip(ColorType.yellow),
+                  _buildColorTypeChip(ColorType.green),
+                  _buildColorTypeChip(ColorType.blue),
+                  _buildColorTypeChip(ColorType.purple),
+                  _buildColorTypeChip(ColorType.pink),
+                  _buildColorTypeChip(ColorType.monochrome),
+                ],
+              ),
+            ],
+          ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child: Text(UIStrings.luminositySubtitle, style: Theme.of(context).textTheme.headline6),
+        const SizedBox(height: 16.0),
+        OptionsContainer(
+          title: UIStrings.luminositySubtitle,
+          child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            children: [
+              _buildLuminosityChip(Luminosity.random),
+              _buildLuminosityChip(Luminosity.bright),
+              _buildLuminosityChip(Luminosity.light),
+              _buildLuminosityChip(Luminosity.dark),
+            ],
+          ),
         ),
-        Wrap(
-          alignment: WrapAlignment.spaceBetween,
-          children: [
-            _buildLuminosityChip(Luminosity.random),
-            _buildLuminosityChip(Luminosity.bright),
-            _buildLuminosityChip(Luminosity.light),
-            _buildLuminosityChip(Luminosity.dark),
-          ],
-        ),
+        // Flex(
+        //   direction: Axis.horizontal,
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //   children: [
+        //     Expanded(
+        //       child: Container(
+        //         color: Colors.black12,
+        //         padding: const EdgeInsets.all(16.0),
+        //         child: Column(
+        //
+        //           crossAxisAlignment: CrossAxisAlignment.start,
+        //           children: [
+        //             Text(UIStrings.colorTypeSubtitle, style: Theme.of(context).textTheme.headline6),
+        //             const SizedBox(height: 16.0),
+        //             _buildColorTypeChip(ColorType.random),
+        //             _buildColorTypeChip(ColorType.red),
+        //             _buildColorTypeChip(ColorType.orange),
+        //             _buildColorTypeChip(ColorType.yellow),
+        //             _buildColorTypeChip(ColorType.green),
+        //             _buildColorTypeChip(ColorType.blue),
+        //             _buildColorTypeChip(ColorType.purple),
+        //             _buildColorTypeChip(ColorType.pink),
+        //             _buildColorTypeChip(ColorType.monochrome),
+        //           ],
+        //         ),
+        //       ),
+        //     ),
+        //     Flexible(
+        //       child: Column(
+        //         crossAxisAlignment: CrossAxisAlignment.start,
+        //         children: [
+        //           _buildLuminosityChip(Luminosity.random),
+        //           _buildLuminosityChip(Luminosity.bright),
+        //           _buildLuminosityChip(Luminosity.light),
+        //           _buildLuminosityChip(Luminosity.dark),
+        //         ],
+        //       ),
+        //     ),
+        //   ],
+        // ),
       ],
     );
   }
 
   Widget _buildColorTypeChip(ColorType colorType) {
-    final Color color = _colorTypeColors[colorType]!;
-    final Color contrastColor = ColorUtils.contrastColor(color);
-
-    return FilterChip(
-      visualDensity: VisualDensity.compact,
-      showCheckmark: false,
-      // avatar: _colorTypes.contains(colorType)
-      //     ? Icon(Icons.check_circle, color: contrastColor.withOpacity(0.75))
-      //     // : const SizedBox.shrink(),
-      //     : Icon(Icons.circle_outlined, color: Colors.white),
-      avatar: CircleAvatar(
-        backgroundColor: Colors.white,
-        child: _colorTypes.contains(colorType)
-            ? const Icon(Icons.check_circle, color: Colors.black87)
-            : const SizedBox.shrink(),
-      ),
-
-      // backgroundColor: _colorTypeColors[colorType]!.withOpacity(0.5),
-      // selectedColor: _colorTypeColors[colorType],
-      backgroundColor: _colorTypeColors[colorType],
-      selectedColor: _colorTypeColors[colorType],
-      shape: StadiumBorder(
-        side: BorderSide(
-          color: color,
-          width: 2.0,
-        ),
-      ),
-      checkmarkColor: contrastColor,
-      // backgroundColor: Colors.transparent,
-      // selectedColor: Colors.transparent,
-      // shape: RoundedRectangleBorder(
-      //   side: BorderSide(color: color, width: 1),
-      //   borderRadius: BorderRadius.circular(10),
-      // ),
-      // avatarBorder: Border.fromBorderSide(BorderSide.none),
-      // avatarBorder: CircleBorder(side: BorderSide(color: Colors.black)),
-      // avatar: const CircleAvatar(
-      //   backgroundColor: Colors.white,
-      // ),
-      // avatar: const SizedBox(width: 8.0, height: 8.0,),
-      label: Text(
-        describeEnum(colorType),
-        style: Theme.of(context).textTheme.caption!.copyWith(color: contrastColor),
-      ),
+    return ColorFilterChip(
+      color: _colorTypeColors[colorType]!,
+      label: describeEnum(colorType),
       selected: _colorTypes.contains(colorType),
       onSelected: (bool value) {
         setState(() {
@@ -120,24 +129,6 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       },
     );
-
-    // return CheckboxListTile(
-    //   title: Text(describeEnum(colorType)),
-    //   controlAffinity: ListTileControlAffinity.leading,
-    //   dense: true,
-    //   value: _colorTypes.contains(colorType),
-    //   onChanged: (bool? value) {
-    //     setState(() {
-    //       if (value != null) {
-    //         if (value) {
-    //           _colorTypes.add(colorType);
-    //         } else {
-    //           _colorTypes.remove(colorType);
-    //         }
-    //       }
-    //     });
-    //   },
-    // );
   }
 
   Widget _buildLuminosityChip(Luminosity luminosity) {
