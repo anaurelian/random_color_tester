@@ -33,13 +33,13 @@ class ColorListItem extends StatelessWidget {
         ),
         contentPadding: const EdgeInsets.all(64.0),
         tileColor: color,
-        subtitle: Text(
-          ColorUtils.toHex(color),
-          style: Theme.of(context).textTheme.subtitle2!.copyWith(color: contrastColor),
-        ),
         title: Text(
           index.toString(),
-          style: Theme.of(context).textTheme.caption!.copyWith(color: contrastColor),
+          style: Theme.of(context).textTheme.overline!.copyWith(color: contrastColor.withOpacity(0.5)),
+        ),
+        subtitle: Text(
+          ColorUtils.toHex(color),
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(color: contrastColor),
         ),
         onTap: onTap,
       ),

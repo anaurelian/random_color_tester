@@ -21,13 +21,16 @@ class RandomColorTester extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: UIStrings.appName,
       theme: ThemeData(
-        brightness: Brightness.light,
-        colorScheme: const ColorScheme.light(
-          primary: Colors.black,
-          secondary: Colors.black,
-          onSecondary: Colors.white,
-        ),
-      ),
+          brightness: Brightness.light,
+          colorScheme: const ColorScheme.light(
+            primary: Colors.black,
+            secondary: Colors.black,
+            onSecondary: Colors.white,
+          ),
+          chipTheme: ChipTheme.of(context).copyWith(
+            secondarySelectedColor: Colors.black,
+            secondaryLabelStyle: const TextStyle(color: Colors.white),
+          )),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         colorScheme: const ColorScheme.dark(

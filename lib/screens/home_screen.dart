@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text(UIStrings.appName),
         actions: [
           IconButton(
-            icon: const Icon(Icons.help),
+            icon: const Icon(Icons.help_outline),
             tooltip: UIStrings.helpTooltip,
             onPressed: _onHelpPressed,
           ),
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: _buildBody(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-        icon: const Icon(Icons.build),
+        icon: const Icon(Icons.color_lens_outlined),
         label: const Text(UIStrings.generateButton),
         onPressed: _generatePressed,
       ),

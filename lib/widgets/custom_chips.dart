@@ -33,7 +33,13 @@ class ColorFilterChip extends StatelessWidget {
       showCheckmark: false,
       avatar: CircleAvatar(
         backgroundColor: Colors.white,
-        child: selected ? const Icon(Icons.check_rounded, color: Colors.black87) : const SizedBox.shrink(),
+        child: selected
+            ? const Icon(
+                Icons.check_rounded,
+                color: Colors.black,
+                size: 20.0,
+              )
+            : const SizedBox.shrink(),
       ),
       backgroundColor: color,
       selectedColor: color,
