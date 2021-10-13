@@ -1,3 +1,9 @@
+// Copyright 2021 anaurelian. All rights reserved.
+// https://anaurelian.com
+//
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 import 'package:random_color_tester/utils/color_utils.dart';
 
@@ -36,31 +42,6 @@ class ColorListItem extends StatelessWidget {
           style: Theme.of(context).textTheme.caption!.copyWith(color: contrastColor),
         ),
         onTap: onTap,
-      ),
-    );
-
-    return Material(
-      color: color,
-      borderRadius: BorderRadius.circular(8.0),
-      clipBehavior: Clip.antiAlias,
-      // type: MaterialType.transparency,
-      // shape: RoundedRectangleBorder(),
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          //color: color,
-          margin: const EdgeInsets.symmetric(vertical: 8.0),
-          // decoration: BoxDecoration(
-          //   // color: color,
-          //   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-          // ),
-          padding: const EdgeInsets.all(16.0),
-          height: 200.0,
-          child: Text(
-            ColorUtils.toHex(color),
-            style: Theme.of(context).textTheme.headline6!.copyWith(color: contrastColor),
-          ),
-        ),
       ),
     );
   }

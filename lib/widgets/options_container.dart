@@ -1,3 +1,9 @@
+// Copyright 2021 anaurelian. All rights reserved.
+// https://anaurelian.com
+//
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 
 class OptionsContainer extends StatelessWidget {

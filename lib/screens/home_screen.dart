@@ -1,3 +1,9 @@
+// Copyright 2021 anaurelian. All rights reserved.
+// https://anaurelian.com
+//
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_randomcolor/flutter_randomcolor.dart';
@@ -5,6 +11,7 @@ import 'package:random_color_tester/common/ui_strings.dart';
 import 'package:random_color_tester/screens/colors_screen.dart';
 import 'package:random_color_tester/widgets/custom_chips.dart';
 import 'package:random_color_tester/widgets/options_container.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,11 +40,23 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.push(context, MaterialPageRoute(builder: (context) => ColorsScreen(colors: colors)));
   }
 
+  Future<void> _onHelpPressed() async {
+    final String url = UIStrings.helpUrl;
+    if (await canLaunch(url)) await launch(url);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(UIStrings.appName),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.help),
+            tooltip: UIStrings.helpTooltip,
+            onPressed: _onHelpPressed,
+          ),
+        ],
       ),
       body: _buildBody(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -122,6 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildLuminosityChip(Luminosity luminosity) {
     return ChoiceChip(
+      // selectedColor: Colors.black,
       label: Text(describeEnum(luminosity)),
       selected: _luminosity == luminosity,
       onSelected: (bool selected) {
@@ -132,18 +152,6 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
     );
-
-    // return RadioListTile<Luminosity>(
-    //   title: Text(describeEnum(luminosity)),
-    //   dense: true,
-    //   value: luminosity,
-    //   groupValue: _luminosity,
-    //   onChanged: (Luminosity? value) => setState(() {
-    //     if (value != null) {
-    //       _luminosity = value;
-    //     }
-    //   }),
-    // );
   }
 
   final Map<ColorType, Color> _colorTypeColors = {
