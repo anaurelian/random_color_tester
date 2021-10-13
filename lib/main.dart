@@ -16,19 +16,16 @@ class RandomColorTester extends StatelessWidget {
       title: UIStrings.appName,
       theme: ThemeData(
         brightness: Brightness.light,
-        toggleableActiveColor: Colors.black,
         colorScheme: const ColorScheme.light(
-          primary: Colors.black87,
+          primary: Colors.black,
+          secondary: Colors.black,
+          onSecondary: Colors.white,
         ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        toggleableActiveColor: Colors.white,
         colorScheme: const ColorScheme.dark(
           primary: Colors.black,
-        ),
-        checkboxTheme: CheckboxThemeData(
-          checkColor: MaterialStateProperty.all<Color>(Colors.black),
         ),
       ),
       home: const HomeScreen(),

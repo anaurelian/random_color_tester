@@ -13,6 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  double _colorCount = 100.0;
+
   final Set<ColorType> _colorTypes = {ColorType.random};
 
   Luminosity _luminosity = Luminosity.random;
@@ -24,6 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text(UIStrings.appName),
       ),
       body: _buildBody(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.build),
+        label: const Text(UIStrings.generateButton),
+        onPressed: () {},
+      ),
     );
   }
 
@@ -31,32 +39,40 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView(
       padding: const EdgeInsets.all(16.0),
       children: [
-        Container(
-          color: Colors.black12,
-          padding: const EdgeInsets.all(16.0),
+        OptionsContainer(
+          title: UIStrings.generateSubtitle,
           child: Column(
             children: [
-              Text(UIStrings.colorTypeSubtitle, style: Theme.of(context).textTheme.headline6),
-              const SizedBox(height: 16.0),
-              Wrap(
-                spacing: 8.0,
-                alignment: WrapAlignment.spaceBetween,
-                children: [
-                  _buildColorTypeChip(ColorType.random),
-                  _buildColorTypeChip(ColorType.red),
-                  _buildColorTypeChip(ColorType.orange),
-                  _buildColorTypeChip(ColorType.yellow),
-                  _buildColorTypeChip(ColorType.green),
-                  _buildColorTypeChip(ColorType.blue),
-                  _buildColorTypeChip(ColorType.purple),
-                  _buildColorTypeChip(ColorType.pink),
-                  _buildColorTypeChip(ColorType.monochrome),
-                ],
+              Text('${_colorCount.toInt()} color${_colorCount != 1 ? 's' : ''}'),
+              Slider(
+                min: 1,
+                max: 1000,
+                value: _colorCount,
+                onChanged: (double value) {
+                  setState(() => _colorCount = value);
+                },
               ),
             ],
           ),
         ),
-        const SizedBox(height: 16.0),
+        OptionsContainer(
+          title: UIStrings.colorTypeSubtitle,
+          child: Wrap(
+            spacing: 8.0,
+            alignment: WrapAlignment.spaceBetween,
+            children: [
+              _buildColorTypeChip(ColorType.random),
+              _buildColorTypeChip(ColorType.red),
+              _buildColorTypeChip(ColorType.orange),
+              _buildColorTypeChip(ColorType.yellow),
+              _buildColorTypeChip(ColorType.green),
+              _buildColorTypeChip(ColorType.blue),
+              _buildColorTypeChip(ColorType.purple),
+              _buildColorTypeChip(ColorType.pink),
+              _buildColorTypeChip(ColorType.monochrome),
+            ],
+          ),
+        ),
         OptionsContainer(
           title: UIStrings.luminositySubtitle,
           child: Wrap(
@@ -69,47 +85,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        // Flex(
-        //   direction: Axis.horizontal,
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     Expanded(
-        //       child: Container(
-        //         color: Colors.black12,
-        //         padding: const EdgeInsets.all(16.0),
-        //         child: Column(
-        //
-        //           crossAxisAlignment: CrossAxisAlignment.start,
-        //           children: [
-        //             Text(UIStrings.colorTypeSubtitle, style: Theme.of(context).textTheme.headline6),
-        //             const SizedBox(height: 16.0),
-        //             _buildColorTypeChip(ColorType.random),
-        //             _buildColorTypeChip(ColorType.red),
-        //             _buildColorTypeChip(ColorType.orange),
-        //             _buildColorTypeChip(ColorType.yellow),
-        //             _buildColorTypeChip(ColorType.green),
-        //             _buildColorTypeChip(ColorType.blue),
-        //             _buildColorTypeChip(ColorType.purple),
-        //             _buildColorTypeChip(ColorType.pink),
-        //             _buildColorTypeChip(ColorType.monochrome),
-        //           ],
-        //         ),
-        //       ),
-        //     ),
-        //     Flexible(
-        //       child: Column(
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         children: [
-        //           _buildLuminosityChip(Luminosity.random),
-        //           _buildLuminosityChip(Luminosity.bright),
-        //           _buildLuminosityChip(Luminosity.light),
-        //           _buildLuminosityChip(Luminosity.dark),
-        //         ],
-        //       ),
-        //     ),
-        //   ],
-        // ),
       ],
     );
   }

@@ -14,6 +14,7 @@ class OptionsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       color: Colors.black12,
       padding: const EdgeInsets.all(16.0),
       child: Column(
